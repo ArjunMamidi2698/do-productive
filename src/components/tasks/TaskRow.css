@@ -1,6 +1,9 @@
 .task-row {
 	display: flex;
 }
+.task-row:hover {
+	background: #0000ff08;
+}
 .task-row > *:not(:first-child) {
 	/* first-child is priority */
 	padding: 1rem;

@@ -1,4 +1,4 @@
-import { DeleteForever, Done, Edit } from "@mui/icons-material";
+import { Clear, DeleteForever, Done, Edit } from "@mui/icons-material";
 
 import "./TaskRowActions.css";
 
@@ -7,17 +7,23 @@ const TaskRowActions = (props) => {
 	const editTaskHandler = () => {
 		props.onEditAction();
 	};
+	const cancelEditTaskHandler = () => {
+		props.onCancelEditAction();
+	};
 	const deleteTaskHandler = () => {
 		console.log("in delete task handler");
 	};
 	return (
 		<div className="task-row__actions">
 			{props.editView ? (
-				<Done
-					className="edit-action"
-					titleAccess="Edit Task"
-					onClick={editTaskHandler}
-				/>
+				<div className="task-row__actions-edit-view">
+					<Done
+						className="edit-action"
+						titleAccess="Edit Task"
+						onClick={editTaskHandler}
+					/>
+					<Clear onClick={cancelEditTaskHandler}/>
+				</div>
 			) : (
 				<Edit
 					className="edit-action"

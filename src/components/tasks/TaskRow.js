@@ -26,6 +26,12 @@ const TaskRow = (props) => {
 			setPriorityLevel(newPriority);
 		}
 	};
+	const cancelEditTaskRow = () => {
+		setEditView(false);
+		// reset
+		setNewTitle(taskTitle);
+		setNewPriority(priorityLevel);
+	};
 	//// new items
 	const [newTitle, setNewTitle] = useState(taskTitle);
 	const [newPriority, setNewPriority] = useState(priorityLevel);
@@ -50,7 +56,11 @@ const TaskRow = (props) => {
 						onChange={(event) => setNewPriority(event.target.value)}
 					>
 						{prioritiesList.map((option) => (
-							<MenuItem key={option} value={option} className={"priority-" + option}>
+							<MenuItem
+								key={option}
+								value={option}
+								className={"priority-" + option}
+							>
 								{option}
 							</MenuItem>
 						))}
@@ -59,7 +69,11 @@ const TaskRow = (props) => {
 			) : (
 				<div className="task-row__title">{taskTitle}</div>
 			)}
-			<TaskRowActions onEditAction={editTaskRow} editView={editView} />
+			<TaskRowActions
+				onEditAction={editTaskRow}
+				onCancelEditAction={cancelEditTaskRow}
+				editView={editView}
+			/>
 		</Box>
 	);
 };

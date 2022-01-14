@@ -1,8 +1,12 @@
+.task-row__actions {
+	display: flex;
+}
 .task-row__actions > * {
 	cursor: pointer;
 	font-size: 20px;
 }
-.task-row__actions > *:not(:last-child) {
+.task-row__actions > *:not(:last-child),
+.task-row__actions-edit-view > *:not(:last-child) {
 	margin-right: .5rem;
 }
 .task-row__actions .delete-action {

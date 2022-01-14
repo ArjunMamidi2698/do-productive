@@ -14,8 +14,8 @@ const TaskActions = () => {
 			<SearchFilter />
 			<DateRangeFilter />
 			<div className="task-actions__switches">
-				<FormControlLabel control={<Switch />} label="Group View" />
-				<FormControlLabel control={<Switch />} label="Show All" />
+				<FormControlLabel disabled control={<Switch />} label="Group View" />
+				<FormControlLabel disabled control={<Switch />} label="Show All" />
 			</div>
 		</Card>
 	);

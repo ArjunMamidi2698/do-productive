@@ -1,14 +1,23 @@
 .task-row {
 	display: flex;
 }
-.task-row > *:not(:first-child) { /* first-child is priority */
+.task-row > *:not(:first-child) {
+	/* first-child is priority */
 	padding: 1rem;
 	align-self: center;
 }
-.task-row__title {
+.task-row__title,
+.task-row__edit-view {
+	display: flex;
 	flex-grow: 1;
 	text-align: left;
 }
 .task-row__priority {
 	width: 12px;
+}
+.task-row__edit-view > * {
+	flex-grow: 2;
+}
+.task-row__edit-view .task-row__priority {
+	flex-grow: 1;
 }

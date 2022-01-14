@@ -1,7 +1,7 @@
 import { Container } from '@mui/material';
 import './App.css';
 import Header from './components/header/Header';
-import TaskActions from './components/actions/TaskActions';
+import TaskActions from './components/filters/TaskActions';
 import TasksContainer from './components/tasks/TasksContainer';
 function App() {
   return (

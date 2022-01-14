@@ -9,6 +9,7 @@ const DateRangeFilter = () => {
 	return (
 		<LocalizationProvider dateAdapter={AdapterDateFns}>
 			<DatePicker
+				disabled
 				label="Search Date From"
 				value={value}
 				onChange={(newValue) => {

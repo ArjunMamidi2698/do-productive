@@ -4,6 +4,7 @@ import { InputAdornment, TextField } from "@mui/material";
 const SearchFilter = () => {
 	return (
 		<TextField
+			disabled
 			label="search"
 			variant="outlined"
 			InputProps={{

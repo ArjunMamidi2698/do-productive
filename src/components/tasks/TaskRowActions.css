@@ -1,0 +1,13 @@
+.task-row__actions > * {
+	cursor: pointer;
+	font-size: 20px;
+}
+.task-row__actions > *:not(:last-child) {
+	margin-right: .5rem;
+}
+.task-row__actions .delete-action {
+	color: red;
+}
+.task-row__actions .edit-action {
+	color: gray;
+}

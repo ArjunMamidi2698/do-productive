@@ -1,0 +1,6 @@
+.tasks-container .tasks-container__content .task-row {
+	border: 1px solid lightgray;
+}
+.tasks-container__content .task-row:not(:last-child) {
+	border-bottom: 0;
+}

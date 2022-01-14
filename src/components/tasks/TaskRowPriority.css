@@ -1,0 +1,12 @@
+.task-row__priority.NONE {
+	background: #80808078;
+}
+.task-row__priority.LOW {
+	background: #00800078;
+}
+.task-row__priority.MEDIUM {
+	background: #ffff0078;
+}
+.task-row__priority.HIGH {
+	background: #ff000078;
+}

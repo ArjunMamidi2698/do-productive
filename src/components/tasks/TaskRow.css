@@ -1,0 +1,14 @@
+.task-row {
+	display: flex;
+}
+.task-row > *:not(:first-child) { /* first-child is priority */
+	padding: 1rem;
+	align-self: center;
+}
+.task-row__title {
+	flex-grow: 1;
+	text-align: left;
+}
+.task-row__priority {
+	width: 12px;
+}

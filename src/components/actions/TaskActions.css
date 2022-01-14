@@ -1,0 +1,15 @@
+.task-actions-card {
+	display: flex;
+	padding: 1rem;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+.task-actions-card > *:first-child {
+	margin-left: auto;
+}
+.task-actions-card > *:not(:last-child) {
+	margin-right: 1rem;
+}
+.task-actions-card .task-actions__switches {
+	display: grid;
+}

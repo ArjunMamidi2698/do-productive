@@ -1,0 +1,21 @@
+header.do-productive-header {
+	display: flex;
+	justify-content: space-between;
+	/* padding: 0 2rem 0 1rem; */
+	padding: 0 2rem;
+	align-items: center;
+	margin-bottom: 1rem;
+}
+.do-productive__logo {
+	width: 200px;
+	/* border: 1rem solid transparent;
+	border-radius: 4rem; */
+}
+.do-productive-header__actions {
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+}
+.do-productive-header__actions > *:not(:last-child) {
+	margin-right: 1rem;
+}

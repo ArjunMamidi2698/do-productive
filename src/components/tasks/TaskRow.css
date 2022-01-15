@@ -24,3 +24,14 @@
 .task-row__edit-view .task-row__priority {
 	flex-grow: 1;
 }
+
+.task-row.done {
+	opacity: .5;
+}
+.task-row.done .task-row__title {
+    text-decoration: line-through;
+}
+.task-row.done .task-row__actions-edit-view,
+.task-row.done .edit-action {
+	display: none;
+}

@@ -1,7 +1,9 @@
 import { KeyboardReturn, Search } from "@mui/icons-material";
 import { InputAdornment, TextField } from "@mui/material";
+import { useState } from "react";
 
 const SearchFilter = () => {
+	const [ searchTerm, setSearchTerm ] = useState( '' );
 	return (
 		<TextField
 			disabled
@@ -19,6 +21,8 @@ const SearchFilter = () => {
 					</InputAdornment>
 				)
 			}}
+			value={searchTerm}
+			onChange={(event) => setSearchTerm( event.target.value )}
 		/>
 	);
 };

@@ -43,16 +43,33 @@ const TasksContainer = () => {
 			doneTask: false,
 		},
 	]);
+	// actions
+	const deleteTaskHandler = (taskId) => {
+		setTasks((prevStateTasks) =>
+			prevStateTasks.filter((task) => task.taskId !== taskId)
+		);
+	};
+	const updateTaskHandler = (taskObj) => {
+		const taskIndex = tasks.findIndex(
+			(task) => task.taskId === taskObj.taskId
+		);
+		if (taskIndex >= 0) tasks[taskIndex] = taskObj;
+		setTasks([...tasks]); // consider new array for rebuilding
+		// // AJ - TODO - UPDATE in DB
+	};
 	return (
 		<Card className="tasks-container">
 			<CardHeader title="Tasks To-DO" />
 			<CardContent className="tasks-container__content">
 				{tasks.map((task, index) => (
 					<TaskRow
-						key={task.taskId}
+						key={"task-" + index}
+						taskId={task.taskId}
 						priorityLevel={task.priorityLevel}
 						doneTask={task.doneTask}
 						taskTitle={task.taskTitle}
+						handleDeleteTask={deleteTaskHandler}
+						handleTaskUpdate={updateTaskHandler}
 					/>
 				))}
 				{/* <TaskRow priorityLevel={1} doneTask={true} taskTitle="test"/>

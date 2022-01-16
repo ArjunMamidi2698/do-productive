@@ -14,6 +14,7 @@ const Header = (props) => {
 					groupsList={props.groupsList}
 					generateNewTaskId={props.generateNewTaskId}
 					handleAddTask={props.handleAddTask}
+					addToGroupsList={props.addToGroupsList}
 				/>
 					
 				{/* handleAddTask={(taskObject) => props.handleAddTask({...taskObject}) } */}

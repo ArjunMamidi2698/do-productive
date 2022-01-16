@@ -6,12 +6,12 @@ import TasksContainer from "./components/tasks/TasksContainer";
 import { useState } from "react";
 function App() {
 	const prioritiesList = [1, 2, 3, 4];
-	const groupsList = ["TODO APP", "EXPENSE APP"];
+	const [groupsList, setGroupsList] = useState(["TODO APP", "EXPENSE APP"]);
 	const [tasks, setTasks] = useState([
 		{
 			taskId: "t1",
 			taskTitle: "Something",
-			priorityLevel: 0,
+			priorityLevel: 4,
 			doneTask: false,
 			groupName: "TODO APP",
 		},
@@ -39,33 +39,39 @@ function App() {
 		{
 			taskId: "t5",
 			taskTitle: "",
-			priorityLevel: -1,
+			priorityLevel: 4,
 			doneTask: false,
 			groupName: "TODO APP",
 		},
 		{
 			taskId: "t6",
 			taskTitle: "Something-6",
-			priorityLevel: 5,
+			priorityLevel: 4,
 			doneTask: false,
 			groupName: "",
 		},
 	]);
 	const generateNewTaskId = () => {
 		// AJ - TODO - NOT A OPTIMAL WAY
-		const lastTaskId = tasks[ tasks.length - 1 ].taskId;
-		console.log( lastTaskId );
-		return "t"+ (parseInt(lastTaskId.slice(1)) + 1);
+		const lastTaskId = tasks[tasks.length - 1].taskId;
+		console.log(lastTaskId);
+		return "t" + (parseInt(lastTaskId.slice(1)) + 1);
 	};
-	const handleAddTask = ( taskObj ) => {
-		console.log(taskObj , "ASDasdasdasdsda");
+	const handleAddTask = (taskObj) => {
+		console.log(taskObj, "ASDasdasdasdsda");
 		// // AJ - TODO - UPDATE in DB
-		setTasks( (prevTasks) => [...prevTasks, taskObj] );
+		setTasks((prevTasks) => [...prevTasks, taskObj]);
 	};
-	const updateTasks = ( tasks ) => {
+	const updateTasks = (tasks) => {
 		// // AJ - TODO - UPDATE in DB
-		setTasks( () => [...tasks]); // consider new array for rebuilding
+		setTasks(() => [...tasks]); // consider new array for rebuilding
 	};
+	const addToGroupsList = ( groupName ) => {
+		console.log( groupName, groupsList );
+		setGroupsList( (prevList) => [...prevList, groupName]);
+	};
+
+	const [isGroupView, setGroupView] = useState(false);
 	return (
 		<div className="App do-productive">
 			<Header
@@ -73,14 +79,19 @@ function App() {
 				groupsList={groupsList}
 				generateNewTaskId={generateNewTaskId}
 				handleAddTask={handleAddTask}
+				addToGroupsList={addToGroupsList}
 			/>
 			<Container>
-				<TaskActions />
+				<TaskActions
+					isGroupView={isGroupView}
+					setGroupView={setGroupView}
+				/>
 				<TasksContainer
 					tasks={tasks}
 					prioritiesList={prioritiesList}
 					groupsList={groupsList}
 					updateTasks={updateTasks}
+					isGroupView={isGroupView}
 				/>
 			</Container>
 		</div>

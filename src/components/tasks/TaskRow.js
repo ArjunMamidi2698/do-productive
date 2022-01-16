@@ -11,7 +11,6 @@ const TaskRow = (props) => {
 	const taskTitle = props?.taskTitle || "";
 	const prioritiesList = props.prioritiesList;
 
-	console.log(taskTitle, props.taskTitle);
 	// actions
 	const updateTask = ( doneStatus ) => {
 		props.handleTaskUpdate({

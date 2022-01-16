@@ -16,7 +16,6 @@ import "./AddTask.css";
 const AddTask = (props) => {
 	const prioritiesList = props?.prioritiesList || [];
 	let groupsList = props?.groupsList || [];
-	groupsList.push("Other");
 	groupsList = groupsList.filter(
 		(val, index) => groupsList.indexOf(val) === index
 	);
@@ -55,6 +54,9 @@ const AddTask = (props) => {
 			groupName: getGroupName(),
 		};
 		props.handleAddTask(taskObj);
+		if(showNewGroupField && newGroupName.trim() !== "") {
+			props.addToGroupsList( newGroupName.trim() );
+		}
 		resetValues();
 		setOpen(false);
 	};
@@ -62,6 +64,8 @@ const AddTask = (props) => {
 		setTaskTitle("");
 		setPriorityLevel("");
 		setGroupName("");
+		setNewGroupName("");
+		setShowNewGroupField(false);
 	};
 	return (
 		<div>
@@ -116,7 +120,7 @@ const AddTask = (props) => {
 								value={groupName}
 								onChange={handleAddGroup}
 							>
-								{groupsList.map((option) => (
+								{[...groupsList,"Other"].map((option) => (
 									<MenuItem
 										key={option}
 										value={option}

@@ -10,7 +10,8 @@
 	align-self: center;
 }
 .task-row__title,
-.task-row__edit-view {
+.task-row__edit-view,
+.task-row__normal-view {
 	display: flex;
 	flex-grow: 1;
 	text-align: left;
@@ -26,12 +27,16 @@
 }
 
 .task-row.done {
-	opacity: .5;
+	opacity: 0.5;
 }
 .task-row.done .task-row__title {
-    text-decoration: line-through;
+	text-decoration: line-through;
 }
 .task-row.done .task-row__actions-edit-view,
 .task-row.done .edit-action {
 	display: none;
+}
+.task-row__group-chip {
+	background: #015380c7 !important;
+	color: white !important;
 }

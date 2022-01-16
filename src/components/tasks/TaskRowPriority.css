@@ -5,7 +5,7 @@
 	background: #00800078;
 }
 .task-row__priority.MEDIUM {
-	background: #ffff0078;
+	background: #f8a82f;
 }
 .task-row__priority.HIGH {
 	background: #ff000078;
@@ -17,7 +17,7 @@
 	color: #008000;
 }
 .MuiMenuItem-root.priority-2 {
-	color: #ffff00;
+	color: #f8a82f;
 }
 .MuiMenuItem-root.priority-1 {
 	color: #ff0000;

@@ -1,4 +1,4 @@
-import { Box, Checkbox, MenuItem, TextField } from "@mui/material";
+import { Box, Checkbox, Chip, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
 
 import "./TaskRow.css";
@@ -9,7 +9,7 @@ const TaskRow = (props) => {
 	const priorityLevel = props?.priorityLevel || 4;
 	const doneTask = props?.doneTask || false;
 	const taskTitle = props?.taskTitle || "";
-	const prioritiesList = [1, 2, 3, 4];
+	const prioritiesList = props.prioritiesList;
 
 	console.log(taskTitle, props.taskTitle);
 	// actions
@@ -19,6 +19,7 @@ const TaskRow = (props) => {
 			taskTitle: newTitle,
 			priorityLevel: newPriority,
 			doneTask: doneStatus !== undefined ? doneStatus : doneTask,
+			groupName: props.groupName
 		});
 	};
 	const updateTaskRow = () => {
@@ -73,7 +74,12 @@ const TaskRow = (props) => {
 					</TextField>
 				</div>
 			) : (
-				<div className="task-row__title">{taskTitle}</div>
+				<div className="task-row__normal-view">
+					<div className="task-row__title">{taskTitle}</div>
+					{
+						props.groupName.trim() !== "" ? <Chip className="task-row__group-chip" label={props.groupName} /> : ""
+					}
+				</div>
 			)}
 			<TaskRowActions
 				handleEditAction={editTaskRow}

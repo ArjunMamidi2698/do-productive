@@ -72,6 +72,7 @@ function App() {
 	};
 
 	const [isGroupView, setGroupView] = useState(false);
+	const [isAllView, setAllView] = useState(false);
 	return (
 		<div className="App do-productive">
 			<Header
@@ -85,6 +86,8 @@ function App() {
 				<TaskActions
 					isGroupView={isGroupView}
 					setGroupView={setGroupView}
+					isAllView={isAllView}
+					setAllView={setAllView}
 				/>
 				<TasksContainer
 					tasks={tasks}
@@ -92,6 +95,7 @@ function App() {
 					groupsList={groupsList}
 					updateTasks={updateTasks}
 					isGroupView={isGroupView}
+					isAllView={isAllView}
 				/>
 			</Container>
 		</div>

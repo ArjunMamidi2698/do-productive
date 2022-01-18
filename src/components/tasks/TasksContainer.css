@@ -4,3 +4,7 @@
 .tasks-container__content .task-row:not(:last-child) {
 	border-bottom: 0;
 }
+.tasks-container__content {
+	overflow: auto;
+	max-height: calc( 80vh - 12rem );
+}

@@ -22,8 +22,14 @@ const TaskActions = (props) => {
 					label="Group View"
 				/>
 				<FormControlLabel
-					disabled
-					control={<Switch />}
+					control={
+						<Switch
+							checked={props.isAllView}
+							onChange={(event) =>
+								props.setAllView(event.target.checked)
+							}
+						/>
+					}
 					label="Show All"
 				/>
 			</div>

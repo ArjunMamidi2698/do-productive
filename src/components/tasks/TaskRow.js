@@ -29,7 +29,7 @@ const TaskRow = (props) => {
 
 			<div className="task-row__normal-view">
 				<div className="task-row__title">{taskTitle}</div>
-				{props.task?.groupId?.trim() !== "" ? (
+				{props.task?.groupId?.trim() !== "" && getGroupName(props.task.groupId) != ""? (
 					<Chip
 						className="task-row__group-chip"
 						label={getGroupName(props.task.groupId)}

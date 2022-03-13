@@ -28,7 +28,7 @@ export const GroupsProvider = ({ children }) => {
 	const value = {
 		groups: groups,
 		getGroupName: (groupId) => {
-			return groups.find((group) => group.groupId == groupId)?.groupName;
+			return groups.find((group) => group.groupId == groupId)?.groupName || "";
 		},
 		addGroup: (groupObj) => {
 			// AJ - TODO - EMPTY VALIDATION CHECK

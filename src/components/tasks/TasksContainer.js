@@ -1,35 +1,17 @@
 import { Card, CardContent, CardHeader } from "@mui/material";
+import { useTasks } from "../../stores/TasksContext";
 import GroupedTaskRowsList from "./GroupedTaskRowsList";
 import TaskRowsList from "./TaskRowsList";
 
 import "./TasksContainer.css";
 
 const TasksContainer = (props) => {
-	const tasks = props.tasks;
-	// actions
-	const deleteTaskHandler = (taskId) => {
-		props.updateTasks(tasks.filter((task) => task.taskId !== taskId));
-	};
-	const updateTaskHandler = (taskObj) => {
-		const taskIndex = tasks.findIndex(
-			(task) => task.taskId === taskObj.taskId
-		);
-		if (taskIndex >= 0) tasks[taskIndex] = taskObj;
-		props.updateTasks(tasks);
-	};
-
+	const { tasks } = useTasks();
 	const buildTaskRowsList = (tasks) => {
 		return (
 			<TaskRowsList
 				tasks={tasks}
-				deleteTaskHandler={deleteTaskHandler}
-				updateTaskHandler={updateTaskHandler}
 				isAllView={props.isAllView}
-				prioritiesList={props.prioritiesList}
-				groupsList={props.groupsList}
-				generateNewTaskId={props.generateNewTaskId}
-				handleAddTask={props.handleAddTask}
-				addToGroupsList={props.addToGroupsList}
 			/>
 		);
 	};
@@ -40,8 +22,7 @@ const TasksContainer = (props) => {
 			<CardContent className="tasks-container__content">
 				{props.isGroupView ? (
 					<GroupedTaskRowsList
-						groupsList={props.groupsList}
-						tasks={props.tasks}
+						tasks={tasks}
 						buildTaskRowsList={buildTaskRowsList}
 					/>
 				) : (

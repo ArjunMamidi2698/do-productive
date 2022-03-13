@@ -1,9 +1,11 @@
+import { useGroups } from "../../stores/GroupsContext";
 import GroupedTaskRow from "./GroupedTaskRow";
 
 const GroupedTaskRowsList = (props) => {
+	const { groups } = useGroups();
 	const getGroupedTasks = () => {
 		let groupedTasks = [];
-		props.groupsList.forEach((groupName) => {
+		groups.forEach(({groupName}) => {
 			groupedTasks.push({
 				groupName: groupName,
 				tasks: props.tasks.filter(

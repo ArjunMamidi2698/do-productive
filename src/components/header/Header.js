@@ -9,14 +9,8 @@ const Header = (props) => {
 		<header className="do-productive-header">
 			<img src={logo} className="do-productive__logo" alt="logo" />
 			<div className="do-productive-header__actions">
-				<AddTask
-					prioritiesList={props.prioritiesList}
-					groupsList={props.groupsList}
-					generateNewTaskId={props.generateNewTaskId}
-					handleAddTask={props.handleAddTask}
-					addToGroupsList={props.addToGroupsList}
-				/>
-					
+				<AddTask />
+
 				{/* handleAddTask={(taskObject) => props.handleAddTask({...taskObject}) } */}
 				<Menu
 				// sx={{ color: "white" }}

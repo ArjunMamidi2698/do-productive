@@ -10,15 +10,16 @@ import {
 	TextField,
 } from "@mui/material";
 import { useState } from "react";
+import { useGroups } from "../../stores/GroupsContext";
+import { useTasks } from "../../stores/TasksContext";
+import { generateRandomId } from "../../utils/helpers";
 
 import "./AddTask.css";
 
 const AddTask = (props) => {
-	const prioritiesList = props?.prioritiesList || [];
-	let groupsList = props?.groupsList || [];
-	groupsList = groupsList.filter(
-		(val, index) => groupsList.indexOf(val) === index
-	);
+	const { updateTask, addTask, prioritiesList } = useTasks();
+	const { groups, addGroup } = useGroups();
+	
 	const [open, setOpen] = useState(false);
 	const [taskTitle, setTaskTitle] = useState(
 		props.isUpdate ? props.taskObject?.taskTitle : ""
@@ -55,16 +56,16 @@ const AddTask = (props) => {
 		const taskObj = {
 			taskId: props.isUpdate
 				? props.taskObject?.taskId
-				: props.generateNewTaskId(),
+				: generateRandomId("task"),
 			taskTitle: taskTitle,
 			priorityLevel: priorityLevel,
 			doneTask: false,
 			groupName: getGroupName(),
 		};
-		if (props.isUpdate) props.handleUpdateTask(taskObj);
-		else props.handleAddTask(taskObj);
+		if (props.isUpdate) updateTask(taskObj);
+		else addTask(taskObj);
 		if (showNewGroupField && newGroupName.trim() !== "") {
-			props.addToGroupsList(newGroupName.trim());
+			addGroup(newGroupName.trim());
 		}
 		if (!props.isUpdate) resetValues();
 		setOpen(false);
@@ -138,13 +139,13 @@ const AddTask = (props) => {
 								value={groupName}
 								onChange={handleAddGroup}
 							>
-								{[...groupsList, "Other"].map((option) => (
+								{groups.map((group) => (
 									<MenuItem
-										key={option}
-										value={option}
-										className={"group-" + option}
+										key={group.groupId}
+										value={group.groupName}
+										className={"group-" + group.groupName}
 									>
-										{option}
+										{group.groupName}
 									</MenuItem>
 								))}
 							</TextField>

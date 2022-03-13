@@ -2,7 +2,7 @@ import TaskRow from "./TaskRow";
 
 const TaskRowsList = (props) => {
 	const getSortedTasksByPriority = (tasks) => {
-		if( !tasks ) return [];
+		if (!tasks) return [];
 		return tasks.sort((a, b) =>
 			a.priorityLevel > b.priorityLevel
 				? 1
@@ -19,23 +19,12 @@ const TaskRowsList = (props) => {
 			(task, index) => (
 				<TaskRow
 					key={"task-" + task.taskId}
-					taskId={task.taskId}
-					priorityLevel={task.priorityLevel}
-					doneTask={task.doneTask}
-					taskTitle={task.taskTitle}
-					groupName={task.groupName}
-					handleDeleteTask={props.deleteTaskHandler}
-					handleTaskUpdate={props.updateTaskHandler}
-					prioritiesList={props.prioritiesList}
-					groupsList={props.groupsList}
-					addToGroupsList={props.addToGroupsList}
+					task={task}
 				/>
 			)
 		);
 	};
 	return buildTaskRows(props.tasks);
-		
-	
 };
 
 export default TaskRowsList;

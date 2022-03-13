@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { generateRandomId } from "../utils/helpers";
 
 const initialState = [
 	{
@@ -13,28 +12,27 @@ const initialState = [
 	{
 		groupId: "group-item-other",
 		groupName: "Other",
-	}
+	},
 ];
 const initialContext = {
 	groups: [],
-	addGroup: (newGroup) => undefined,
+	getGroupName: (groupId) => undefined,
+	addGroup: (groupObj) => undefined,
 	updateGroup: (groupObj) => undefined,
 	deleteGroup: (groupObj) => undefined,
 };
 export const GroupsContext = createContext(initialContext);
 export const useGroups = () => useContext(GroupsContext);
-const formatGroup = (groupName) => {
-	return {
-		groupId: generateRandomId("group"),
-		groupName,
-	};
-};
 export const GroupsProvider = ({ children }) => {
 	const [groups, setGroups] = useState(initialState);
 	const value = {
 		groups: groups,
-		addGroup: (newGroup) => {
-			setGroups((prevGroups) => [formatGroup(newGroup), ...prevGroups]);
+		getGroupName: (groupId) => {
+			return groups.find((group) => group.groupId == groupId)?.groupName;
+		},
+		addGroup: (groupObj) => {
+			// AJ - TODO - EMPTY VALIDATION CHECK
+			setGroups((prevGroups) => [groupObj, ...prevGroups]);
 		},
 		updateGroup: (groupObj) => {
 			setGroups((prevGroups) => {

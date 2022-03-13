@@ -1,8 +1,8 @@
-import { Menu } from "@mui/icons-material";
 import logo from "../../assets/img/logo.png";
 import AddTask from "./AddTask";
 
 import "./Header.css";
+import { HeaderMenu } from "./menu/Menu";
 
 const Header = (props) => {
 	return (
@@ -10,11 +10,7 @@ const Header = (props) => {
 			<img src={logo} className="do-productive__logo" alt="logo" />
 			<div className="do-productive-header__actions">
 				<AddTask />
-
-				{/* handleAddTask={(taskObject) => props.handleAddTask({...taskObject}) } */}
-				<Menu
-				// sx={{ color: "white" }}
-				/>
+				<HeaderMenu />
 			</div>
 		</header>
 	);

@@ -19,7 +19,7 @@ import "./AddTask.css";
 const AddTask = (props) => {
 	const { updateTask, addTask, prioritiesList } = useTasks();
 	const { groups, addGroup } = useGroups();
-	
+
 	const [open, setOpen] = useState(false);
 	const [taskTitle, setTaskTitle] = useState(
 		props.isUpdate ? props.taskObject?.taskTitle : ""
@@ -27,30 +27,31 @@ const AddTask = (props) => {
 	const [priorityLevel, setPriorityLevel] = useState(
 		props.isUpdate ? props.taskObject?.priorityLevel : ""
 	);
-	const [groupName, setGroupName] = useState(
-		props.isUpdate ? props.taskObject?.groupName : ""
+	const [groupId, setGroupId] = useState(
+		props.isUpdate ? props.taskObject?.groupId : ""
 	);
 
 	const [newGroupName, setNewGroupName] = useState("");
 	const [showNewGroupField, setShowNewGroupField] = useState(false);
 	// form actions
 	const handleAddGroup = (event) => {
-		setGroupName(event.target.value);
-		setShowNewGroupField(event.target.value === "Other");
+		setGroupId(event.target.value);
+		setShowNewGroupField(event.target.value === "group-item-other");
 	};
 
 	// Dialog actions
 	const handleClose = () => {
 		setOpen(false);
 	};
-	const getGroupName = () => {
-		let gname = "";
+	let newGroupId = "";
+	const getGroupId = () => {
 		if (showNewGroupField) {
-			if (newGroupName.trim() !== "") gname = newGroupName.trim();
+			if (newGroupName.trim() !== "")
+				return (newGroupId = generateRandomId("group"));
 		} else {
-			if (groupName.trim() !== "") gname = groupName.trim();
+			if (groupId !== "") return groupId;
 		}
-		return gname;
+		return "";
 	};
 	const handleAddTask = () => {
 		const taskObj = {
@@ -60,12 +61,15 @@ const AddTask = (props) => {
 			taskTitle: taskTitle,
 			priorityLevel: priorityLevel,
 			doneTask: false,
-			groupName: getGroupName(),
+			groupId: getGroupId(),
 		};
 		if (props.isUpdate) updateTask(taskObj);
 		else addTask(taskObj);
 		if (showNewGroupField && newGroupName.trim() !== "") {
-			addGroup(newGroupName.trim());
+			addGroup({
+				groupId: newGroupId,
+				groupName: newGroupName.trim(),
+			});
 		}
 		if (!props.isUpdate) resetValues();
 		setOpen(false);
@@ -73,7 +77,7 @@ const AddTask = (props) => {
 	const resetValues = () => {
 		setTaskTitle("");
 		setPriorityLevel("");
-		setGroupName("");
+		setGroupId(props.isUpdate ? props.taskObject?.groupId : "");
 		setNewGroupName("");
 		setShowNewGroupField(false);
 	};
@@ -136,13 +140,13 @@ const AddTask = (props) => {
 								fullWidth
 								select
 								label="Group/Goal"
-								value={groupName}
+								value={groupId}
 								onChange={handleAddGroup}
 							>
 								{groups.map((group) => (
 									<MenuItem
 										key={group.groupId}
-										value={group.groupName}
+										value={group.groupId}
 										className={"group-" + group.groupName}
 									>
 										{group.groupName}

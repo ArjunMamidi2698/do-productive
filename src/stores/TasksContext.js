@@ -6,42 +6,42 @@ const initialState = [
 		taskTitle: "Something",
 		priorityLevel: 4,
 		doneTask: false,
-		groupName: "TODO APP",
+		groupId: "g1",
 	},
 	{
 		taskId: "t2",
 		taskTitle: "Something-2",
 		priorityLevel: 1,
 		doneTask: false,
-		groupName: "EXPENSE APP",
+		groupId: "g2",
 	},
 	{
 		taskId: "t3",
 		taskTitle: "Something-3",
 		priorityLevel: 2,
 		doneTask: false,
-		groupName: "",
+		groupId: "",
 	},
 	{
 		taskId: "t4",
 		taskTitle: "Something-n",
 		priorityLevel: 3,
 		doneTask: false,
-		groupName: "",
+		groupId: "",
 	},
 	{
 		taskId: "t5",
 		taskTitle: "",
 		priorityLevel: 4,
 		doneTask: false,
-		groupName: "TODO APP",
+		groupId: "g1",
 	},
 	{
 		taskId: "t6",
 		taskTitle: "Something-6",
 		priorityLevel: 4,
 		doneTask: false,
-		groupName: "",
+		groupId: "",
 	},
 ];
 const initialContext = {
@@ -59,6 +59,7 @@ export const TasksProvider = ({ children }) => {
 		tasks: tasks,
 		prioritiesList: initialContext.prioritiesList,
 		addTask: (newTask) => {
+			// AJ - TODO - EMPTY VALIDATION CHECK
 			setTasks((prevTasks) => [newTask, ...prevTasks]);
 		},
 		updateTask: (taskObj) => {

@@ -1,0 +1,19 @@
+.group-row {
+	display: flex;
+	width: 20rem;
+	margin: 0.5rem 0;
+	align-items: center;
+}
+.group-row .group-name {
+	flex:1;
+}
+.group-row .group-row-actions {
+	display: flex;
+	align-self: center;
+}
+.group-row-actions > *:not(:last-child) {
+	margin-right: .5rem;
+}
+.group-row-actions.hide {
+	display: none;
+}

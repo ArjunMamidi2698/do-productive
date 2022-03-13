@@ -1,5 +1,6 @@
 import { Box, Checkbox, Chip, MenuItem, TextField } from "@mui/material";
 import { useState } from "react";
+import { useGroups } from "../../stores/GroupsContext";
 import { useTasks } from "../../stores/TasksContext";
 
 import "./TaskRow.css";
@@ -11,7 +12,7 @@ const TaskRow = (props) => {
 	const doneTask = props?.task?.doneTask || false;
 	const taskTitle = props?.task?.taskTitle || "";
 	const { updateTask } = useTasks();
-
+	const { getGroupName } = useGroups();
 	// actions
 	const updateTaskRow = () => {
 		// AJ - TODO - add strike-through animation
@@ -28,18 +29,16 @@ const TaskRow = (props) => {
 
 			<div className="task-row__normal-view">
 				<div className="task-row__title">{taskTitle}</div>
-				{props.task.groupName.trim() !== "" ? (
+				{props.task?.groupId?.trim() !== "" ? (
 					<Chip
 						className="task-row__group-chip"
-						label={props.task.groupName}
+						label={getGroupName(props.task.groupId)}
 					/>
 				) : (
 					""
 				)}
 			</div>
-			<TaskRowActions
-				task={props.task}
-			/>
+			<TaskRowActions task={props.task} />
 		</Box>
 	);
 };

@@ -66,9 +66,9 @@ function App() {
 		// // AJ - TODO - UPDATE in DB
 		setTasks(() => [...tasks]); // consider new array for rebuilding
 	};
-	const addToGroupsList = ( groupName ) => {
-		console.log( groupName, groupsList );
-		setGroupsList( (prevList) => [...prevList, groupName]);
+	const addToGroupsList = (groupName) => {
+		console.log(groupName, groupsList);
+		setGroupsList((prevList) => [...prevList, groupName]);
 	};
 
 	const [isGroupView, setGroupView] = useState(false);
@@ -93,6 +93,7 @@ function App() {
 					tasks={tasks}
 					prioritiesList={prioritiesList}
 					groupsList={groupsList}
+					addToGroupsList={addToGroupsList}
 					updateTasks={updateTasks}
 					isGroupView={isGroupView}
 					isAllView={isAllView}

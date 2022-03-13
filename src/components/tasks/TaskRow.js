@@ -12,18 +12,18 @@ const TaskRow = (props) => {
 	const prioritiesList = props.prioritiesList;
 
 	// actions
-	const updateTask = ( doneStatus ) => {
+	const updateTask = (doneStatus) => {
 		props.handleTaskUpdate({
 			taskId: props.taskId,
 			taskTitle: newTitle,
 			priorityLevel: newPriority,
 			doneTask: doneStatus !== undefined ? doneStatus : doneTask,
-			groupName: props.groupName
+			groupName: props.groupName,
 		});
 	};
 	const updateTaskRow = () => {
 		// AJ - TODO - add strike-through animation
-		updateTask( !doneTask );
+		updateTask(!doneTask);
 	};
 	const [editView, setEditView] = useState(false);
 	const editTaskRow = () => {
@@ -75,12 +75,28 @@ const TaskRow = (props) => {
 			) : (
 				<div className="task-row__normal-view">
 					<div className="task-row__title">{taskTitle}</div>
-					{
-						props.groupName.trim() !== "" ? <Chip className="task-row__group-chip" label={props.groupName} /> : ""
-					}
+					{props.groupName.trim() !== "" ? (
+						<Chip
+							className="task-row__group-chip"
+							label={props.groupName}
+						/>
+					) : (
+						""
+					)}
 				</div>
 			)}
 			<TaskRowActions
+				prioritiesList={props.prioritiesList}
+				groupsList={props.groupsList}
+				addToGroupsList={props.addToGroupsList}
+				taskObject={{
+					taskId: props.taskId,
+					taskTitle: taskTitle,
+					priorityLevel: priorityLevel,
+					doneTask: doneTask,
+					groupName: props.groupName,
+				}}
+				handleUpdateTask={props.handleTaskUpdate}
 				handleEditAction={editTaskRow}
 				handleCancelEditAction={cancelEditTaskRow}
 				editView={editView}

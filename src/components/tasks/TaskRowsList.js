@@ -27,6 +27,8 @@ const TaskRowsList = (props) => {
 					handleDeleteTask={props.deleteTaskHandler}
 					handleTaskUpdate={props.updateTaskHandler}
 					prioritiesList={props.prioritiesList}
+					groupsList={props.groupsList}
+					addToGroupsList={props.addToGroupsList}
 				/>
 			)
 		);

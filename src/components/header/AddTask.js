@@ -1,4 +1,4 @@
-import { Add } from "@mui/icons-material";
+import { Add, Edit } from "@mui/icons-material";
 import {
 	Button,
 	Dialog,
@@ -20,9 +20,15 @@ const AddTask = (props) => {
 		(val, index) => groupsList.indexOf(val) === index
 	);
 	const [open, setOpen] = useState(false);
-	const [taskTitle, setTaskTitle] = useState("");
-	const [priorityLevel, setPriorityLevel] = useState("");
-	const [groupName, setGroupName] = useState("");
+	const [taskTitle, setTaskTitle] = useState(
+		props.isUpdate ? props.taskObject?.taskTitle : ""
+	);
+	const [priorityLevel, setPriorityLevel] = useState(
+		props.isUpdate ? props.taskObject?.priorityLevel : ""
+	);
+	const [groupName, setGroupName] = useState(
+		props.isUpdate ? props.taskObject?.groupName : ""
+	);
 
 	const [newGroupName, setNewGroupName] = useState("");
 	const [showNewGroupField, setShowNewGroupField] = useState(false);
@@ -47,17 +53,20 @@ const AddTask = (props) => {
 	};
 	const handleAddTask = () => {
 		const taskObj = {
-			taskId: props.generateNewTaskId(),
+			taskId: props.isUpdate
+				? props.taskObject?.taskId
+				: props.generateNewTaskId(),
 			taskTitle: taskTitle,
 			priorityLevel: priorityLevel,
 			doneTask: false,
 			groupName: getGroupName(),
 		};
-		props.handleAddTask(taskObj);
-		if(showNewGroupField && newGroupName.trim() !== "") {
-			props.addToGroupsList( newGroupName.trim() );
+		if (props.isUpdate) props.handleUpdateTask(taskObj);
+		else props.handleAddTask(taskObj);
+		if (showNewGroupField && newGroupName.trim() !== "") {
+			props.addToGroupsList(newGroupName.trim());
 		}
-		resetValues();
+		if (!props.isUpdate) resetValues();
 		setOpen(false);
 	};
 	const resetValues = () => {
@@ -69,14 +78,23 @@ const AddTask = (props) => {
 	};
 	return (
 		<div>
-			<Button
-				variant="contained"
-				startIcon={<Add />}
-				className="do-productive__add-btn"
-				onClick={() => setOpen(true)}
-			>
-				Add Task
-			</Button>
+			{!props.isUpdate ? (
+				<Button
+					variant="contained"
+					startIcon={<Add />}
+					className="do-productive__add-btn"
+					onClick={() => setOpen(true)}
+				>
+					Add Task
+				</Button>
+			) : (
+				<Edit
+					className="edit-action"
+					titleAccess="Edit Task"
+					onClick={() => setOpen(true)}
+				/>
+			)}
+
 			<Dialog open={open} onClose={handleClose}>
 				<DialogTitle>Add Task</DialogTitle>
 				<DialogContent className="add-task-content">
@@ -120,7 +138,7 @@ const AddTask = (props) => {
 								value={groupName}
 								onChange={handleAddGroup}
 							>
-								{[...groupsList,"Other"].map((option) => (
+								{[...groupsList, "Other"].map((option) => (
 									<MenuItem
 										key={option}
 										value={option}
@@ -150,7 +168,7 @@ const AddTask = (props) => {
 				<DialogActions>
 					<Button onClick={handleClose}>Cancel</Button>
 					<Button onClick={handleAddTask} autoFocus>
-						Add
+						{props.isUpdate ? "Update" : "Add"}
 					</Button>
 				</DialogActions>
 			</Dialog>

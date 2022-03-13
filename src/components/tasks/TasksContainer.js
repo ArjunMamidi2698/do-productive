@@ -24,8 +24,12 @@ const TasksContainer = (props) => {
 				tasks={tasks}
 				deleteTaskHandler={deleteTaskHandler}
 				updateTaskHandler={updateTaskHandler}
-				prioritiesList={props.prioritiesList}
 				isAllView={props.isAllView}
+				prioritiesList={props.prioritiesList}
+				groupsList={props.groupsList}
+				generateNewTaskId={props.generateNewTaskId}
+				handleAddTask={props.handleAddTask}
+				addToGroupsList={props.addToGroupsList}
 			/>
 		);
 	};

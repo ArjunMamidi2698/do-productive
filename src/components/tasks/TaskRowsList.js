@@ -1,3 +1,4 @@
+import NoTasksView from "./NoTasksView";
 import TaskRow from "./TaskRow";
 
 const TaskRowsList = (props) => {
@@ -11,18 +12,15 @@ const TaskRowsList = (props) => {
 				: 0
 		);
 	};
-	const filteredTasks = (tasks) => {
+	const getFilteredTasks = (tasks) => {
 		return tasks.filter((task) => props.isAllView || !task.doneTask);
 	};
 	const buildTaskRows = (tasks) => {
-		return getSortedTasksByPriority(filteredTasks(tasks)).map(
-			(task, index) => (
-				<TaskRow
-					key={"task-" + task.taskId}
-					task={task}
-				/>
-			)
-		);
+		const filteredTasks = getFilteredTasks(tasks);
+		if (!filteredTasks.length) return <NoTasksView />;
+		return getSortedTasksByPriority(filteredTasks).map((task, index) => (
+			<TaskRow key={"task-" + task.taskId} task={task} />
+		));
 	};
 	return buildTaskRows(props.tasks);
 };

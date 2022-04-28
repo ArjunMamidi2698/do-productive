@@ -1,5 +1,6 @@
 .task-row__actions {
 	display: flex;
+	z-index: 1;
 }
 .task-row__actions > * {
 	cursor: pointer;

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { signIn } from "../services/userService";
 
 const initialState = [
 	{
@@ -58,9 +59,11 @@ export const TasksProvider = ({ children }) => {
 	const value = {
 		tasks: tasks,
 		prioritiesList: initialContext.prioritiesList,
-		addTask: (newTask) => {
+		addTask: async (newTask) => {
 			// AJ - TODO - EMPTY VALIDATION CHECK
 			setTasks((prevTasks) => [newTask, ...prevTasks]);
+			const res = await signIn({email: "arjunm8179@gmail.com", password: "testarjun"});
+			console.log(res);
 		},
 		updateTask: (taskObj) => {
 			setTasks((prevTasks) => {

@@ -10,7 +10,7 @@ export const MessageItem = ({ signInView, setSignInView }) => {
 				{signInView ? "Please register and start your journey to be productive." : "Please login to view you tasks"}
 			</span>
 			<Button
-				variant="contained"
+				variant="outlined"
 				className="message-item__action"
 				onClick={() => setSignInView((prev) => !prev)}
 			>

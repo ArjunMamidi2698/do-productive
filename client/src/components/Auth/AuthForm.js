@@ -36,7 +36,12 @@ export const AuthForm = ({ signInView, setSignInView }) => {
 					</span>
 				)}
 			</p>
-			<Button variant="contained" fullWidth>
+
+			<Button
+				variant="contained"
+				fullWidth
+				className="formitem__action"
+			>
 				{signInView ? "Sign In" : "Sign Up"}
 			</Button>
 		</>

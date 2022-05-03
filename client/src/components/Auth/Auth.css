@@ -12,6 +12,7 @@
 	transition: all 700ms;
 	padding: 2rem;
 	transform: translateX(0);
+	color: #4b85a4;
 }
 .auth-card .message-item {
 	background-color: #4b85a4;
@@ -34,8 +35,15 @@
 	padding: 0;
 }
 
-.message-item__action {
-	background: #faa830 !important;
+.auth-card .message-item__action,
+.auth-card .message-item__action:hover {
+	color: white;
+	border-color: white;
+	border-radius: 4rem;
+}
+.auth-card .formitem__action,
+.auth-card .formitem__action:hover {
+	background: #4b85a4;
 }
 
 

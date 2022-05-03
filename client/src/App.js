@@ -4,12 +4,14 @@ import Header from "./components/header/Header";
 import TaskActions from "./components/filters/TaskActions";
 import TasksContainer from "./components/tasks/TasksContainer";
 import { useState } from "react";
+import { Auth } from "./components/Auth/Auth";
 function App() {
 	const [isGroupView, setGroupView] = useState(false);
 	const [isAllView, setAllView] = useState(false);
 	return (
 		<div className="App do-productive">
-			<Header />
+			<Auth /> {/* AJ- TODO - Show this based on crsf token */}
+			{/* <Header />
 			<Container>
 				<TaskActions
 					isGroupView={isGroupView}
@@ -21,7 +23,7 @@ function App() {
 					isGroupView={isGroupView}
 					isAllView={isAllView}
 				/>
-			</Container>
+			</Container> */}
 		</div>
 	);
 }

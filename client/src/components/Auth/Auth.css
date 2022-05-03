@@ -1,0 +1,41 @@
+.auth-card {
+	height: 55vh;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto 25%;
+	min-width: 45rem;
+}
+.auth-card .MuiGrid-item {
+	transition: all 700ms;
+	padding: 2rem;
+	transform: translateX(0);
+}
+.auth-card .message-item {
+	background-color: #4b85a4;
+	color: White;
+	display: flex;
+	flex-flow: column;
+	justify-content: space-around;
+	z-index: 2;
+}
+.auth-card.sign-in-view .message-item {
+	transform: translateX(100%);
+}
+.auth-card.sign-in-view .form-item {
+	transform: translateX(-100%);
+}
+
+.auth-card .MuiCardContent-root,
+.auth-card .MuiGrid-container {
+	height: 100%;
+	padding: 0;
+}
+
+.message-item__action {
+	background: #faa830 !important;
+}
+
+

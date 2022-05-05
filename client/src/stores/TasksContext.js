@@ -1,49 +1,13 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+	addTaskRequest,
+	deleteTaskRequest,
+	getTasksRequest,
+	updateTaskRequest,
+} from "../services/task.service";
+import { useAuth } from "./AuthContext";
 
-const initialState = [
-	{
-		taskId: "t1",
-		taskTitle: "Something",
-		priorityLevel: 4,
-		doneTask: false,
-		groupId: "g1",
-	},
-	{
-		taskId: "t2",
-		taskTitle: "Something-2",
-		priorityLevel: 1,
-		doneTask: false,
-		groupId: "g2",
-	},
-	{
-		taskId: "t3",
-		taskTitle: "Something-3",
-		priorityLevel: 2,
-		doneTask: false,
-		groupId: "",
-	},
-	{
-		taskId: "t4",
-		taskTitle: "Something-n",
-		priorityLevel: 3,
-		doneTask: false,
-		groupId: "",
-	},
-	{
-		taskId: "t5",
-		taskTitle: "",
-		priorityLevel: 4,
-		doneTask: false,
-		groupId: "g1",
-	},
-	{
-		taskId: "t6",
-		taskTitle: "Something-6",
-		priorityLevel: 4,
-		doneTask: false,
-		groupId: "",
-	},
-];
+const initialState = [];
 const initialContext = {
 	tasks: [],
 	prioritiesList: [1, 2, 3, 4],
@@ -55,26 +19,61 @@ export const TasksContext = createContext(initialContext);
 export const useTasks = () => useContext(TasksContext);
 export const TasksProvider = ({ children }) => {
 	const [tasks, setTasks] = useState(initialState);
+	const { token } = useAuth();
+	useEffect(() => {
+		async function fetchData() {
+			const res = await getTasksRequest({ Authorization: token });
+			if (res.status == 200 && res.data && res.data.tasks) {
+				setTasks(res.data.tasks);
+			} else {
+				// AJ - TODO - Show error message
+			}
+		}
+		fetchData();
+	}, []); // get after first render
 	const value = {
 		tasks: tasks,
 		prioritiesList: initialContext.prioritiesList,
 		addTask: async (newTask) => {
 			// AJ - TODO - EMPTY VALIDATION CHECK
-			setTasks((prevTasks) => [newTask, ...prevTasks]);
+			const res = await addTaskRequest(newTask, { Authorization: token });
+			if (res.status == 200 && res.data && res.data.task) {
+				setTasks((prevTasks) => [res.data.task, ...prevTasks]);
+			} else {
+				// AJ - TODO - Show error message
+			}
 		},
-		updateTask: (taskObj) => {
-			setTasks((prevTasks) => {
-				const taskIndex = prevTasks.findIndex(
-					(task) => task.taskId === taskObj.taskId
-				);
-				if (taskIndex >= 0) prevTasks[taskIndex] = taskObj;
-				return [...prevTasks];
+		updateTask: async (taskObj) => {
+			const res = await updateTaskRequest(taskObj, {
+				Authorization: token,
 			});
+			if (res.status == 200 && res.data && res.data.task) {
+				const updatedTask = res.data.task;
+				setTasks((prevTasks) => {
+					const taskIndex = prevTasks.findIndex(
+						(task) => task.taskId === updatedTask.taskId
+					);
+					if (taskIndex >= 0) prevTasks[taskIndex] = updatedTask;
+					return [...prevTasks];
+				});
+			} else {
+				// AJ - TODO - Show error message
+			}
 		},
-		deleteTask: (taskObj) => {
-			setTasks((prevTasks) =>
-				prevTasks.filter((task) => task.taskId != taskObj.taskId)
-			);
+		deleteTask: async (taskObj) => {
+			const res = await deleteTaskRequest(taskObj, {
+				Authorization: token,
+			});
+			if (res.status == 200 && res.data && res.data.task) {
+				const deletedTask = res.data.task;
+				setTasks((prevTasks) =>
+					prevTasks.filter(
+						(task) => task.taskId !== deletedTask.taskId
+					)
+				);
+			} else {
+				// AJ - TODO - Show error message
+			}
 		},
 	};
 	return (

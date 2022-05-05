@@ -24,10 +24,6 @@ export const AuthProvider = ({ children }) => {
 		setToken(null);
 	};
 	const signIn = async (params) => {
-		const dummyParams = {
-			email: "arjunm8179@gmail.com",
-			password: "testarjun",
-		};
 		const res = await signInRequest(params);
 		if (res.status == 200 && res.data && res.data.token) {
 			addToken(res.data.token);
@@ -36,11 +32,6 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 	const signUp = async (params) => {
-		const dummyParams = {
-			email: "arjunm8179@gmail.com",
-			password: "testarjun",
-			username: "Arjun",
-		};
 		const res = await signUpRequest(params);
 		if (res.status == 200 && res.data && res.data.token) {
 			// AJ - TODO - Show success message

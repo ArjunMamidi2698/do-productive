@@ -8,11 +8,3 @@ export const signUpRequest = async (params, headers) => {
 	const response = await client.post(`/signup`, params);
 	return response;
 };
-
-// export const addTask = async (params, headers) => {
-// 	const dummyHeaders = { Authorization: "aj" };
-// 	const response = await client.post(`/signup`, params, {
-// 		headers: dummyHeaders,
-// 	});
-// 	return response;
-// };

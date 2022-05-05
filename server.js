@@ -10,6 +10,7 @@ var serveStatic = require("serve-static");
 
 var userRoutes = require("./backend/routes/user");
 var taskRoutes = require("./backend/routes/task");
+var groupRoutes = require("./backend/routes/group");
 
 var db = mongoose.connection;
 var dbconnected = false;
@@ -49,7 +50,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/", userRoutes);
-// app.use('/', taskRoutes);
+app.use('/', taskRoutes);
+app.use('/', groupRoutes);
 
 if (process.env.NODE_ENV == "production") {
 	app.use(serveStatic(__dirname + "/client/build"));

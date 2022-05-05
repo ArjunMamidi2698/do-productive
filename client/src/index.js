@@ -5,14 +5,17 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { TasksProvider } from "./stores/TasksContext.js";
 import { GroupsProvider } from "./stores/GroupsContext";
+import { AuthProvider } from "./stores/AuthContext";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<TasksProvider>
-			<GroupsProvider>
-				<App />
-			</GroupsProvider>
-		</TasksProvider>
+		<AuthProvider>
+			<TasksProvider>
+				<GroupsProvider>
+					<App />
+				</GroupsProvider>
+			</TasksProvider>
+		</AuthProvider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

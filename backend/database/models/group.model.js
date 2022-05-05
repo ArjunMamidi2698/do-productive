@@ -1,9 +1,10 @@
 var mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 
 var Group = mongoose.model("groups", {
 	groupId: String,
 	groupName: String,
-	creator: String, // Email id of user who created the group
+	creator: ObjectId, // objectid for the of user who created the group
 });
 
 module.exports.Group = Group;

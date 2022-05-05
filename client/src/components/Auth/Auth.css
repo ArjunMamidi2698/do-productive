@@ -19,8 +19,9 @@
 	color: White;
 	display: flex;
 	flex-flow: column;
-	justify-content: space-around;
 	z-index: 2;
+	line-height: 2rem;
+    justify-content: center;
 }
 .auth-card.sign-in-view .message-item {
 	transform: translateX(100%);
@@ -40,10 +41,17 @@
 	color: white;
 	border-color: white;
 	border-radius: 4rem;
+	margin-top: 2rem;
 }
 .auth-card .formitem__action,
 .auth-card .formitem__action:hover {
 	background: #4b85a4;
 }
 
+.auth-card .form-item .other-auth-view-action {
+	font-size: .8rem;
+	cursor: pointer;
+	text-decoration: underline;
+	margin-bottom: 3rem;
+}
 

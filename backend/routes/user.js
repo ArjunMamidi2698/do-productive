@@ -54,7 +54,7 @@ router.post("/signin", async (req, res) => {
 		const doMatch = await bcrypt.compare(password, user.password);
 		if (doMatch) {
 			const token = jwt.sign({ userId: user._id }, JWT_SECRET);
-			res.status(201).json({ token });
+			res.status(200).json({ token });
 		} else {
 			return res
 				.status(401)

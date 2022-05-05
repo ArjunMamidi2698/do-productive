@@ -1,4 +1,4 @@
-# DoProductive
+# DoProductive - frontend
  - Simple Todo list app, the best way to manage and organize your life (if you do it the right way), can easily break down your big goals into items, and items into tasks.
 
 ## Technologies Used:
@@ -9,7 +9,7 @@
 ```
 $ git clone https://github.com/ArjunMamidi2698/do-productive.git
 
-$ cd do-productive
+$ cd do-productive/client
 
 $ npm i
 

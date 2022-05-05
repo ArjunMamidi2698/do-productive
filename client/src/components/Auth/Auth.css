@@ -1,0 +1,57 @@
+.auth-card {
+	height: 55vh;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto 25%;
+	min-width: 45rem;
+}
+.auth-card .MuiGrid-item {
+	transition: all 700ms;
+	padding: 2rem;
+	transform: translateX(0);
+	color: #4b85a4;
+}
+.auth-card .message-item {
+	background-color: #4b85a4;
+	color: White;
+	display: flex;
+	flex-flow: column;
+	z-index: 2;
+	line-height: 2rem;
+    justify-content: center;
+}
+.auth-card.sign-in-view .message-item {
+	transform: translateX(100%);
+}
+.auth-card.sign-in-view .form-item {
+	transform: translateX(-100%);
+}
+
+.auth-card .MuiCardContent-root,
+.auth-card .MuiGrid-container {
+	height: 100%;
+	padding: 0;
+}
+
+.auth-card .message-item__action,
+.auth-card .message-item__action:hover {
+	color: white;
+	border-color: white;
+	border-radius: 4rem;
+	margin-top: 2rem;
+}
+.auth-card .formitem__action,
+.auth-card .formitem__action:hover {
+	background: #4b85a4;
+}
+
+.auth-card .form-item .other-auth-view-action {
+	font-size: .8rem;
+	cursor: pointer;
+	text-decoration: underline;
+	margin-bottom: 3rem;
+}
+

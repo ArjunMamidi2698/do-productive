@@ -30,7 +30,7 @@ export const TasksProvider = ({ children }) => {
 			}
 		}
 		fetchData();
-	}, []); // get after first render
+	}, [token]); // get after first render
 	const value = {
 		tasks: tasks,
 		prioritiesList: initialContext.prioritiesList,

@@ -1,6 +1,12 @@
 import { Button } from "@mui/material";
+import { useAuth } from "../../stores/AuthContext";
 
 export const MessageItem = ({ signInView, setSignInView }) => {
+	const { setAuthFormError } = useAuth();
+	const switchView = () => {
+		setSignInView((prev) => !prev);
+		setAuthFormError(null);
+	};
 	return (
 		<>
 			<h1 className="message-item__title">
@@ -14,7 +20,7 @@ export const MessageItem = ({ signInView, setSignInView }) => {
 			<Button
 				variant="outlined"
 				className="message-item__action"
-				onClick={() => setSignInView((prev) => !prev)}
+				onClick={switchView}
 			>
 				{signInView ? "Sign Up" : "Sign In"}
 			</Button>

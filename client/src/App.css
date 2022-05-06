@@ -1,8 +1,23 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 html {
-  /* background: #1c5237ad; */
-  background: #efefefad;
+	/* background: #1c5237ad; */
+	background: #efefefad;
+}
+
+::-webkit-scrollbar {
+	width: 4px;
+}
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey; 
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+	background: #4b85a4;
+	border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: #376680; 
 }

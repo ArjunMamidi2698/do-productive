@@ -1,11 +1,11 @@
 .auth-card {
-	height: 55vh;
+	height: 60vh;
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin: auto 25%;
+	margin: auto 15%;
 	min-width: 45rem;
 }
 .auth-card .MuiGrid-item {
@@ -13,6 +13,7 @@
 	padding: 2rem;
 	transform: translateX(0);
 	color: #4b85a4;
+	max-height: 100%;
 }
 .auth-card .message-item {
 	background-color: #4b85a4;
@@ -21,7 +22,7 @@
 	flex-flow: column;
 	z-index: 2;
 	line-height: 2rem;
-    justify-content: center;
+	justify-content: center;
 }
 .auth-card.sign-in-view .message-item {
 	transform: translateX(100%);
@@ -48,10 +49,28 @@
 	background: #4b85a4;
 }
 
+.auth-card .form-item .form-item__box {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	overflow: auto;
+}
+.auth-card .form-item .form-item__fieldset {
+	display: flex;
+	flex-direction: column;
+	flex-flow: column;
+	align-self: center;
+}
 .auth-card .form-item .other-auth-view-action {
 	font-size: .8rem;
 	cursor: pointer;
 	text-decoration: underline;
-	margin-bottom: 3rem;
 }
 
+.auth-card .form-item .auth-form-error {
+	color: #d32f2f;
+	font-size: 16px;
+}
+.auth-card .form-item .auth-form-error::before {
+	content: "*";
+}

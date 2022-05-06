@@ -35,7 +35,7 @@ export const GroupsProvider = ({ children }) => {
 			}
 		}
 		fetchData();
-	}, []); // get after first render
+	}, [token]); // get after first render
 	const value = {
 		groups: groups,
 		getGroupName: (groupId) => {

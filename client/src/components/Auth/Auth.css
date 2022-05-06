@@ -55,6 +55,12 @@
 	height: 100%;
 	overflow: auto;
 }
+.auth-card .form-item .form-item__fieldset {
+	display: flex;
+	flex-direction: column;
+	flex-flow: column;
+	align-self: center;
+}
 .auth-card .form-item .other-auth-view-action {
 	font-size: .8rem;
 	cursor: pointer;

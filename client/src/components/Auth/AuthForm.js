@@ -110,6 +110,7 @@ export const AuthForm = ({ signInView, setSignInView }) => {
 				sx={{
 					"& > :not(style)": { m: 1, width: "25ch" },
 				}}
+				className="form-item__fieldset"
 				noValidate
 				autoComplete="off"
 			>

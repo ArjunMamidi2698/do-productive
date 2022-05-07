@@ -1,11 +1,10 @@
 import { createContext, useContext, useState } from "react";
 import { signInRequest, signUpRequest } from "../services/auth.service";
 import { DO_PRODUCTIVE_AUTH_TOKEN } from "../utils/constants";
+import { useSnackbar } from "./SnackbarContext";
 
 const initialContext = {
 	token: null,
-	authFormError: null,
-	setAuthFormError: (value) => undefined,
 	signIn: (params) => undefined,
 	signUp: (params) => undefined,
 	signOut: (params) => undefined,
@@ -17,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 	const [token, setToken] = useState(
 		localStorage.getItem(DO_PRODUCTIVE_AUTH_TOKEN)
 	);
-	const [authFormError, setAuthFormError] = useState(null);
+	const { showSuccessSnackbar, showErrorSnackbar } = useSnackbar();
 	const addToken = (token) => {
 		localStorage.setItem(DO_PRODUCTIVE_AUTH_TOKEN, token);
 		setToken(token);
@@ -32,13 +31,12 @@ export const AuthProvider = ({ children }) => {
 			console.log(res);
 			if (res.status == 200 && res.data && res.data.token) {
 				addToken(res.data.token);
-				setAuthFormError(null);
 				return true; // signinSuccess
 			}
-			setAuthFormError(res.data.error);
+			showErrorSnackbar(res.data.error);
 			return false;
 		} catch (error) {
-			setAuthFormError(error.response.data.error);
+			showErrorSnackbar(error?.response?.data?.error);
 			return false;
 		}
 	};
@@ -46,14 +44,13 @@ export const AuthProvider = ({ children }) => {
 		try {
 			const res = await signUpRequest(params);
 			if (res.status == 200) {
-				// AJ - TODO - Show success message
-				setAuthFormError(null);
+				showSuccessSnackbar(res.data.message);
 				return true; // signupSuccess
 			}
-			setAuthFormError(res.data.error);
+			showErrorSnackbar(res.data.error);
 			return false;
 		} catch (error) {
-			setAuthFormError(error.response.data.error);
+			showErrorSnackbar(error?.response?.data?.error);
 			return false;
 		}
 	};
@@ -62,8 +59,6 @@ export const AuthProvider = ({ children }) => {
 	};
 	const value = {
 		token,
-		authFormError,
-		setAuthFormError,
 		signIn,
 		signUp,
 		signOut,

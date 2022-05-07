@@ -1,11 +1,8 @@
 import { Button } from "@mui/material";
-import { useAuth } from "../../stores/AuthContext";
 
 export const MessageItem = ({ signInView, setSignInView }) => {
-	const { setAuthFormError } = useAuth();
 	const switchView = () => {
 		setSignInView((prev) => !prev);
-		setAuthFormError(null);
 	};
 	return (
 		<>

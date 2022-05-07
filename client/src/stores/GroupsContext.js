@@ -6,6 +6,7 @@ import {
 	updateGroupRequest,
 } from "../services/group.service";
 import { useAuth } from "./AuthContext";
+import { useSnackbar } from "./SnackbarContext";
 
 const initialState = [];
 const otherTypeGroupItem = {
@@ -36,6 +37,7 @@ export const GroupsProvider = ({ children }) => {
 		}
 		fetchData();
 	}, [token]); // get after first render
+	const { showSuccessSnackbar, showErrorSnackbar } = useSnackbar();
 	const value = {
 		groups: groups,
 		getGroupName: (groupId) => {
@@ -46,45 +48,61 @@ export const GroupsProvider = ({ children }) => {
 		},
 		addGroup: async (groupObj) => {
 			// AJ - TODO - EMPTY VALIDATION CHECK
-			const res = await addGroupRequest(groupObj, {
-				Authorization: token,
-			});
-			if (res.status == 200 && res.data && res.data.group) {
-				setGroups((prevGroups) => [res.data.group, ...prevGroups]);
-			} else {
-				// AJ - TODO - Show error message
+			try {
+				const res = await addGroupRequest(groupObj, {
+					Authorization: token,
+				});
+				if (res.status == 200 && res.data && res.data.group) {
+					setGroups((prevGroups) => [res.data.group, ...prevGroups]);
+					showSuccessSnackbar(res.data.message);
+				} else {
+					showErrorSnackbar(res.data.error);
+				}
+			} catch (error) {
+				showErrorSnackbar(error?.response?.data?.error);
 			}
 		},
 		updateGroup: async (groupObj) => {
-			const res = await updateGroupRequest(groupObj, {
-				Authorization: token,
-			});
-			if (res.status == 200 && res.data && res.data.group) {
-				const updatedGroup = res.data.group;
-				setGroups((prevGroups) => {
-					const groupIndex = prevGroups.findIndex(
-						(group) => group.groupId === updatedGroup.groupId
-					);
-					if (groupIndex >= 0) prevGroups[groupIndex] = updatedGroup;
-					return [...prevGroups];
+			try {
+				const res = await updateGroupRequest(groupObj, {
+					Authorization: token,
 				});
-			} else {
-				// AJ - TODO - Show error message
+				if (res.status == 200 && res.data && res.data.group) {
+					const updatedGroup = res.data.group;
+					setGroups((prevGroups) => {
+						const groupIndex = prevGroups.findIndex(
+							(group) => group.groupId === updatedGroup.groupId
+						);
+						if (groupIndex >= 0)
+							prevGroups[groupIndex] = updatedGroup;
+						return [...prevGroups];
+					});
+					showSuccessSnackbar(res.data.message);
+				} else {
+					showErrorSnackbar(res.data.error);
+				}
+			} catch (error) {
+				showErrorSnackbar(error?.response?.data?.error);
 			}
 		},
 		deleteGroup: async (groupObj) => {
-			const res = await deleteGroupRequest(groupObj, {
-				Authorization: token,
-			});
-			if (res.status == 200 && res.data && res.data.group) {
-				const deletedGroup = res.data.group;
-				setGroups((prevGroups) =>
-					prevGroups.filter(
-						(group) => group.groupId != deletedGroup.groupId
-					)
-				);
-			} else {
-				// AJ - TODO - Show error message
+			try {
+				const res = await deleteGroupRequest(groupObj, {
+					Authorization: token,
+				});
+				if (res.status == 200 && res.data && res.data.group) {
+					const deletedGroup = res.data.group;
+					setGroups((prevGroups) =>
+						prevGroups.filter(
+							(group) => group.groupId != deletedGroup.groupId
+						)
+					);
+					showSuccessSnackbar(res.data.message);
+				} else {
+					showErrorSnackbar(res.data.error);
+				}
+			} catch (error) {
+				showErrorSnackbar(error?.response?.data?.error);
 			}
 		},
 	};

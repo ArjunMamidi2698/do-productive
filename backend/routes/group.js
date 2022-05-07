@@ -28,7 +28,7 @@ router.post("/addGroup", requireLogin, async (req, res) => {
 		}).save();
 		const { groupId, groupName } = data;
 		res.status(200).json({
-			message: "group created",
+			message: "Group Created Successfully",
 			group: { groupId, groupName },
 		});
 	} catch (error) {
@@ -45,7 +45,7 @@ router.put("/updateGroup", requireLogin, async (req, res) => {
 		);
 		const { groupId, groupName } = data;
 		res.status(200).json({
-			message: "group upadted",
+			message: "Group Upadted Successfully",
 			group: { groupId, groupName },
 		});
 	} catch (error) {
@@ -61,7 +61,7 @@ router.post("/deleteGroup", requireLogin, async (req, res) => {
 		});
 		const { groupId, groupName } = data;
 		res.status(200).json({
-			message: "group deleted",
+			message: "Group Deleted Successfully",
 			group: { groupId, groupName },
 		});
 	} catch (error) {

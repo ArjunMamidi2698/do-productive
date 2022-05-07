@@ -49,7 +49,7 @@ router.post("/addTask", requireLogin, async (req, res) => {
 		}).save();
 		const { taskId, taskTitle, priorityLevel, doneTask, groupId } = data;
 		res.status(200).json({
-			message: "task created",
+			message: "Task Created Successfully",
 			task: { taskId, taskTitle, priorityLevel, doneTask, groupId },
 		});
 	} catch (error) {
@@ -66,7 +66,7 @@ router.put("/updateTask", requireLogin, async (req, res) => {
 		);
 		const { taskId, taskTitle, priorityLevel, doneTask, groupId } = data;
 		res.status(200).json({
-			message: "task updated",
+			message: "Task Updated Successfully",
 			task: { taskId, taskTitle, priorityLevel, doneTask, groupId },
 		});
 	} catch (error) {
@@ -82,7 +82,7 @@ router.post("/deleteTask", requireLogin, async (req, res) => {
 		});
 		const { taskId, taskTitle, priorityLevel, doneTask, groupId } = data;
 		res.status(200).json({
-			message: "task deleted",
+			message: "Task Deleted Successfully",
 			task: { taskId, taskTitle, priorityLevel, doneTask, groupId },
 		});
 	} catch (error) {

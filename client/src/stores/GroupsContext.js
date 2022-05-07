@@ -25,17 +25,19 @@ export const useGroups = () => useContext(GroupsContext);
 export const GroupsProvider = ({ children }) => {
 	const [groups, setGroups] = useState(initialState);
 	const { token } = useAuth();
-	useEffect(() => {
-		async function fetchData() {
-			const res = await getGroupsRequest({ Authorization: token });
-			if (res.status == 200 && res.data && res.data.groups) {
-				res.data.groups.push(otherTypeGroupItem);
-				setGroups(res.data.groups);
-			} else {
-				// AJ - TODO - Show error message
-			}
+	async function fetchData() {
+		const res = await getGroupsRequest({ Authorization: token });
+		if (res.status == 200 && res.data && res.data.groups) {
+			res.data.groups.push(otherTypeGroupItem);
+			setGroups(res.data.groups);
+		} else {
+			// AJ - TODO - Show error message
 		}
-		fetchData();
+	}
+	useEffect(() => {
+		if( token ) {
+			fetchData();
+		}
 	}, [token]); // get after first render
 	const { showSuccessSnackbar, showErrorSnackbar } = useSnackbar();
 	const value = {

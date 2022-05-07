@@ -21,16 +21,18 @@ export const useTasks = () => useContext(TasksContext);
 export const TasksProvider = ({ children }) => {
 	const [tasks, setTasks] = useState(initialState);
 	const { token } = useAuth();
-	useEffect(() => {
-		async function fetchData() {
-			const res = await getTasksRequest({ Authorization: token });
-			if (res.status == 200 && res.data && res.data.tasks) {
-				setTasks(res.data.tasks);
-			} else {
-				// AJ - TODO - Show error message
-			}
+	async function fetchData() {
+		const res = await getTasksRequest({ Authorization: token });
+		if (res.status == 200 && res.data && res.data.tasks) {
+			setTasks(res.data.tasks);
+		} else {
+			// AJ - TODO - Show error message
 		}
-		fetchData();
+	}
+	useEffect(() => {
+		if( token ) {
+			fetchData();
+		}
 	}, [token]); // get after first render
 	const { showSuccessSnackbar, showErrorSnackbar } = useSnackbar();
 	const value = {

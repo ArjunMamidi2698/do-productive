@@ -1,12 +1,14 @@
 import { Box, Button, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../stores/AuthContext";
+import { useSnackbar } from "../../stores/SnackbarContext";
 
 export const AuthForm = ({ signInView, setSignInView }) => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [username, setUsername] = useState("");
-	const { authFormError, setAuthFormError, signIn, signUp } = useAuth();
+	const { signIn, signUp } = useAuth();
+	const { showErrorSnackbar } = useSnackbar();
 	const resetForm = () => {
 		setEmail("");
 		setPassword("");
@@ -27,7 +29,6 @@ export const AuthForm = ({ signInView, setSignInView }) => {
 	};
 	const switchView = () => {
 		setSignInView((prev) => !prev);
-		setAuthFormError(null);
 	};
 	const validateEmail = (email) => {
 		var re = /\S+@\S+\.\S+/;
@@ -44,7 +45,7 @@ export const AuthForm = ({ signInView, setSignInView }) => {
 			const element = inputFields[index];
 			if (element.validator) {
 				if (!element.validator(element.value)) {
-					setAuthFormError(
+					showErrorSnackbar(
 						"Invalid Form, Please fill all required fields with valid input"
 					);
 					return false;
@@ -139,9 +140,6 @@ export const AuthForm = ({ signInView, setSignInView }) => {
 					? "Don't have an account? Register here"
 					: "Already have an account? Sign in here"}
 			</p>
-			{authFormError && (
-				<p className="auth-form-error">{authFormError}</p>
-			)}
 			<div style={{ flexGrow: 1 }}></div>
 			<Button
 				variant="contained"

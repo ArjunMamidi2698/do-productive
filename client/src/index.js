@@ -6,16 +6,19 @@ import reportWebVitals from "./reportWebVitals";
 import { TasksProvider } from "./stores/TasksContext.js";
 import { GroupsProvider } from "./stores/GroupsContext";
 import { AuthProvider } from "./stores/AuthContext";
+import { SnackbarProvider } from "./stores/SnackbarContext";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<AuthProvider>
-			<TasksProvider>
-				<GroupsProvider>
-					<App />
-				</GroupsProvider>
-			</TasksProvider>
-		</AuthProvider>
+		<SnackbarProvider>
+			<AuthProvider>
+				<TasksProvider>
+					<GroupsProvider>
+						<App />
+					</GroupsProvider>
+				</TasksProvider>
+			</AuthProvider>
+		</SnackbarProvider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

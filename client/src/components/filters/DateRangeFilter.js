@@ -19,6 +19,7 @@ const DateRangeFilter = () => {
 				maxDate={new Date()}
 				minDate={new Date( "01/01/2022" )}
 				inputFormat="dd-MM-yyyy"
+				mask="__-__-____"
 			/>
 		</LocalizationProvider>
 	);

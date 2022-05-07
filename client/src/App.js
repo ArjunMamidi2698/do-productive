@@ -10,6 +10,7 @@ function App() {
 	const { token } = useAuth();
 	const [isGroupView, setGroupView] = useState(false);
 	const [isAllView, setAllView] = useState(false);
+
 	return (
 		<div className="App do-productive">
 			{token ? (

@@ -1,6 +1,9 @@
 # DoProductive
  - Simple Todo list app, the best way to manage and organize your life (if you do it the right way), can easily break down your big goals into items, and items into tasks.
 
+See working app here:
+https://do-productive.vercel.app/
+
 ## Technologies Used:
  - React Js
  - Material UI
@@ -28,6 +31,3 @@ Server
 $ npm run client:build && npm run server
 
 ```
-
-See working app here:
-https://do-productive.vercel.app/
